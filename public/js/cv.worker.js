@@ -9,6 +9,8 @@ function imageProcessing({ msg, payload }) {
 
   // What this does is convert the image to a grey scale.
   cv.cvtColor(img, result, cv.COLOR_BGR2GRAY)
+  // cv.cvtColor(img, result, cv.COLOR_BGR2RGB)
+  // cv.cvtColor(img, result, cv.COLOR_BGR2RGBA)
   postMessage({ msg, payload: imageDataFromMat(result) })
 }
 
@@ -77,6 +79,7 @@ onmessage = function (e) {
   switch (e.data.msg) {
     case 'load': {
       // Import Webassembly script
+      // self.importScripts('./opencv.js')
       self.importScripts('./opencv_3_4_custom_O3.js')
       waitForOpencv(function (success) {
         if (success) postMessage({ msg: e.data.msg })
